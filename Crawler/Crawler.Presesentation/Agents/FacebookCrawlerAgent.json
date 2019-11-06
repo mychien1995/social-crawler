@@ -1,0 +1,11 @@
+{
+  "agentType": "FacebookCrawlerAgent",
+  "configurationType": "FacebookCrawlerConfiguration",
+  "configuration": {
+    "Username": "huydiettraidat01@gmail.com",
+    "Password": "84720197",
+    "EmailXPathQuery": ".//*[@id='email']",
+    "PasswordXPathQuery": ".//*[@id='pass']",
+    "LoginButtonXPathQuery": "//*[@data-testid='royal_login_button']"
+  }
+}
