@@ -8,7 +8,6 @@ namespace Crawler.Core
 {
     public class DataOutputBase
     {
-        public int FollowersCount { get; set; }
-        public decimal AvgPostPerWeek { get; set; }
+        public Dictionary<string, object> PropertyBag { get; set; }
     }
 }

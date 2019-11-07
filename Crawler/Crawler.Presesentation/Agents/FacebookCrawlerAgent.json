@@ -16,11 +16,19 @@
           "XPathQuery": "(.//*[@class='_4-u2 _6590 _3xaf _4-u8']/*[@class='_2pi9 _2pi2'])[1]//*[@class='_4bl9']"
         }
       },
+      //{
+      //  "Property": "PostedDateList",
+      //  "RetrieverType": "Crawler.Providers.FacebookCrawler.Retriever.PostDateListDataRetriever, Crawler.Providers",
+      //  "Parameters": {
+      //    "XPathQuery": "//*[@id='PagesProfileHomePrimaryColumnPagelet']//*[contains(@id,'u_0_1')][2]/*[@class='_1xnd']/*[@class='_1xnd']/*[@class='_1xnd']/*[@class='_4-u2 _4-u8']//*[@class='_5pcr userContentWrapper']//abbr"
+      //  }
+      //},
       {
-        "Property": "PostedDateList",
-        "RetrieverType": "Crawler.Providers.FacebookCrawler.Retriever.PostDateListDataRetriever, Crawler.Providers",
+        "Property": "AvgPostPerWeek",
+        "RetrieverType": "Crawler.Providers.FacebookCrawler.Retriever.AvgPostPerWeekDataRetriever, Crawler.Providers",
         "Parameters": {
-          "XPathQuery": "//*[@id='PagesProfileHomePrimaryColumnPagelet']//*[contains(@id,'u_0_1')][2]/*[@class='_1xnd']/*[@class='_1xnd']/*[@class='_1xnd']/*[@class='_4-u2 _4-u8']//*[@class='_5pcr userContentWrapper']//abbr"
+          "XPathQuery": "//*[@id='PagesProfileHomePrimaryColumnPagelet']//*[contains(@id,'u_0_1')][2]/*[@class='_1xnd']/*[@class='_1xnd']/*[@class='_1xnd']//*[@class='_4-u2 _4-u8']//*[@class='_5pcr userContentWrapper']//a[@rel='theater']/abbr"
+
         }
       }
     ]

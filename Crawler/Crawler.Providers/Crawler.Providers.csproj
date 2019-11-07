@@ -64,6 +64,7 @@
     <Compile Include="FacebookCrawler\FacebookCrawlerDataInput.cs" />
     <Compile Include="FacebookCrawler\FacebookCrawlerConfiguration.cs" />
     <Compile Include="FacebookCrawler\FacebookCrawlerDataOutput.cs" />
+    <Compile Include="FacebookCrawler\Retriever\AvgPostPerWeekDataRetriever.cs" />
     <Compile Include="FacebookCrawler\Retriever\FollowersDataRetriever.cs" />
     <Compile Include="FacebookCrawler\Retriever\PostDateListDataRetriever.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

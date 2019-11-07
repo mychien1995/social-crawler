@@ -38,9 +38,9 @@ namespace Crawler.Providers.FacebookCrawler
             {
                 htmlPropertiesDict.Add(htmlProperty.Property, htmlProperty.GetValue(_driver, input));
             }
-            var followersCount = htmlPropertiesDict["Followers"];
-            var postedDateList = htmlPropertiesDict["PostedDateList"];
-            return null;
+            var output = new DataOutputBase();
+            output.PropertyBag = htmlPropertiesDict;
+            return output;
         }
 
         private void DoLogin(FacebookCrawlerDataInput facebookInput)

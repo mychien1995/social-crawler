@@ -19,8 +19,8 @@ namespace Crawler.Presesentation
             {
                 var input = new FacebookCrawlerDataInput();
                 input.EndDate = DateTime.Now;
-                input.StartDate = DateTime.Now.AddDays(-7);
-                input.PageUrl = "https://www.facebook.com/grantthorntonportugal/";
+                input.StartDate = DateTime.Now.AddDays(-365);
+                input.PageUrl = "https://www.facebook.com/grantthorntonspain/";
                 agents.FirstOrDefault().Value.RetrieveData(input);
             }
             Console.ReadLine();

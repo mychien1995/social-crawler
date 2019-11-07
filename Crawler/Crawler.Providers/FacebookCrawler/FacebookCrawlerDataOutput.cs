@@ -9,5 +9,7 @@ namespace Crawler.Providers.FacebookCrawler
 {
     public class FacebookCrawlerDataOutput : DataOutputBase
     {
+        public int FollowersCount { get; set; }
+        public decimal AvgPostPerWeek { get; set; }
     }
 }
