@@ -1,6 +1,8 @@
 ﻿using Crawler.Core;
+using Crawler.Providers.Crawlers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,40 +14,53 @@ namespace Crawler.Providers.FacebookCrawler
 {
     public class FacebookCrawlerAgent : SocialTrackingAgent
     {
-        private FacebookCrawlerConfiguration _configuration
-        {
-            get
-            {
-                if (this.Configuration is FacebookCrawlerConfiguration) return (FacebookCrawlerConfiguration)this.Configuration;
-                return null;
-            }
-        }
+        private FacebookCrawlerConfiguration Configuration;
 
         private IWebDriver _driver;
 
-        public FacebookCrawlerAgent(ISocialAgentConfiguration configuration) : base(configuration, SocialPlatform.Facebook)
-        {
+        private ICrawlerConfigurationHelper _crawlerConfigurationHelper;
 
+        public FacebookCrawlerAgent(FacebookCrawlerConfiguration configuration) : base(SocialPlatform.Facebook)
+        {
+            Configuration = configuration;
+            _crawlerConfigurationHelper = new CrawlerConfigurationHelper();
         }
 
         public override DataOutputBase RetrieveData(DataInputBase input)
         {
             if (!(input is FacebookCrawlerDataInput)) return null;
             var facebookInput = input as FacebookCrawlerDataInput;
+            DoLogin(facebookInput);
+
+            var htmlProperties = _crawlerConfigurationHelper.LoadHtmlProperties(Configuration);
+            var htmlPropertiesDict = new Dictionary<string, object>();
+            foreach (var htmlProperty in htmlProperties)
+            {
+                htmlPropertiesDict.Add(htmlProperty.Property, htmlProperty.GetValue(_driver, input));
+            }
+            var followersCount = htmlPropertiesDict["Followers"];
+            var postedDateList = htmlPropertiesDict["PostedDateList"];
+            return null;
+        }
+
+        private void DoLogin(FacebookCrawlerDataInput facebookInput)
+        {
             if (_driver == null)
             {
                 var browserDirectory = ConfigurationManager.AppSettings["Selenium.ChromeDirectory"];
-                _driver = new ChromeDriver(browserDirectory);
+                ChromeOptions options = new ChromeOptions();
+                options.AddArguments("--disable-notifications");
+                _driver = new ChromeDriver(browserDirectory, options);
             }
-            _driver.Url = facebookInput.PageUrl;
+            _driver.Url = Configuration.LoginUrl;
             _driver.Manage().Window.Maximize();
-            IWebElement emailTextBox = _driver.FindElement(By.XPath(_configuration.EmailXPathQuery));
-            emailTextBox.SendKeys(_configuration.Username);
-            IWebElement passwordTextBox = _driver.FindElement(By.XPath(_configuration.PasswordXPathQuery));
-            passwordTextBox.SendKeys(_configuration.Password);
-            IWebElement loginBtn = _driver.FindElement(By.XPath(_configuration.LoginButtonXPathQuery));
+            IWebElement emailTextBox = _driver.FindElement(By.XPath(Configuration.EmailXPathQuery));
+            emailTextBox.SendKeys(Configuration.Username);
+            IWebElement passwordTextBox = _driver.FindElement(By.XPath(Configuration.PasswordXPathQuery));
+            passwordTextBox.SendKeys(Configuration.Password);
+            IWebElement loginBtn = _driver.FindElement(By.XPath(Configuration.LoginButtonXPathQuery));
             loginBtn.Click();
-            return null;
+            _driver.Url = facebookInput.PageUrl;
         }
     }
 }

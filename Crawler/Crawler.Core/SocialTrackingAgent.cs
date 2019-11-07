@@ -8,11 +8,9 @@ namespace Crawler.Core
 {
     public abstract class SocialTrackingAgent
     {
-        public ISocialAgentConfiguration Configuration;
         public string Platform;
-        public SocialTrackingAgent(ISocialAgentConfiguration configuration, string platform)
+        public SocialTrackingAgent(string platform)
         {
-            this.Configuration = configuration;
             this.Platform = platform;
         }
         public abstract DataOutputBase RetrieveData(DataInputBase input);

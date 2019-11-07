@@ -20,7 +20,7 @@ namespace Crawler.Presesentation
                 var input = new FacebookCrawlerDataInput();
                 input.EndDate = DateTime.Now;
                 input.StartDate = DateTime.Now.AddDays(-7);
-                input.PageUrl = "https://www.facebook.com/";
+                input.PageUrl = "https://www.facebook.com/grantthorntonportugal/";
                 agents.FirstOrDefault().Value.RetrieveData(input);
             }
             Console.ReadLine();
