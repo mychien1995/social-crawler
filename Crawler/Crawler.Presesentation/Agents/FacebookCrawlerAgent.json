@@ -1,4 +1,5 @@
 {
+  "name": "DefaultFacebookCrawlerAgent",
   "agentType": "FacebookCrawlerAgent",
   "configurationType": "FacebookCrawlerConfiguration",
   "configuration": {

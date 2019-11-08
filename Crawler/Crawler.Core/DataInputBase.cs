@@ -8,6 +8,8 @@ namespace Crawler.Core
 {
     public class DataInputBase
     {
+        public string Agent { get; set; }
+        public string AccountName { get; set; }
         public string Platform { get; set; }
         public string Region { get; set; }
         public string Owner { get; set; }

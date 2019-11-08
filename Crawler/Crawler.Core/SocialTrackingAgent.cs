@@ -8,7 +8,8 @@ namespace Crawler.Core
 {
     public abstract class SocialTrackingAgent
     {
-        public string Platform;
+        public string Platform { get; set; }
+        public bool IsActive { get; set; }
         public SocialTrackingAgent(string platform)
         {
             this.Platform = platform;

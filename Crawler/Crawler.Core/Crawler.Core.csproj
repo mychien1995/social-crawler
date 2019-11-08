@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulkRequest.cs" />
+    <Compile Include="BulkRequestResponse.cs" />
     <Compile Include="DataInputBase.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DataOutputBase.cs" />

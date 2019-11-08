@@ -9,6 +9,8 @@ namespace Crawler.Engine.Configurations
 {
     public class JsonAgentObject
     {
+        [JsonProperty("name")]
+        public string Name { get; set; }
         [JsonProperty("agentType")]
         public string AgentType { get; set; }
         [JsonProperty("configurationType")]

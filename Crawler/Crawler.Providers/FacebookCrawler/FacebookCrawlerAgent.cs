@@ -29,15 +29,24 @@ namespace Crawler.Providers.FacebookCrawler
         public override DataOutputBase RetrieveData(DataInputBase input)
         {
             if (!(input is FacebookCrawlerDataInput)) return null;
+            this.IsActive = true;
             var facebookInput = input as FacebookCrawlerDataInput;
-            DoLogin(facebookInput);
-
+            if (_driver == null)
+            {
+                var browserDirectory = ConfigurationManager.AppSettings["Selenium.ChromeDirectory"];
+                ChromeOptions options = new ChromeOptions();
+                options.AddArguments("--disable-notifications");
+                _driver = new ChromeDriver(browserDirectory, options);
+                DoLogin(facebookInput);
+            }
+            _driver.Url = facebookInput.PageUrl;
             var htmlProperties = _crawlerConfigurationHelper.LoadHtmlProperties(Configuration);
             var htmlPropertiesDict = new Dictionary<string, object>();
             foreach (var htmlProperty in htmlProperties)
             {
                 htmlPropertiesDict.Add(htmlProperty.Property, htmlProperty.GetValue(_driver, input));
             }
+            this.IsActive = false;
             var output = new DataOutputBase();
             output.PropertyBag = htmlPropertiesDict;
             return output;
@@ -45,13 +54,6 @@ namespace Crawler.Providers.FacebookCrawler
 
         private void DoLogin(FacebookCrawlerDataInput facebookInput)
         {
-            if (_driver == null)
-            {
-                var browserDirectory = ConfigurationManager.AppSettings["Selenium.ChromeDirectory"];
-                ChromeOptions options = new ChromeOptions();
-                options.AddArguments("--disable-notifications");
-                _driver = new ChromeDriver(browserDirectory, options);
-            }
             _driver.Url = Configuration.LoginUrl;
             _driver.Manage().Window.Maximize();
             IWebElement emailTextBox = _driver.FindElement(By.XPath(Configuration.EmailXPathQuery));
@@ -60,7 +62,6 @@ namespace Crawler.Providers.FacebookCrawler
             passwordTextBox.SendKeys(Configuration.Password);
             IWebElement loginBtn = _driver.FindElement(By.XPath(Configuration.LoginButtonXPathQuery));
             loginBtn.Click();
-            _driver.Url = facebookInput.PageUrl;
         }
     }
 }
