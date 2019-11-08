@@ -20,7 +20,7 @@ namespace Crawler.Providers.FacebookCrawler.Retriever
             var startTime = (fbInput.StartDate.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
             var endTime = (fbInput.EndDate.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalSeconds;
             var result = new List<int>();
-            int maxRetryCount = 20;
+            int maxRetryCount = 5;
             int retryCount = 0;
             while (true)
             {

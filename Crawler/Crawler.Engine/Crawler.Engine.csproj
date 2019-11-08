@@ -73,7 +73,6 @@
     <Compile Include="Services\Excels\ExcelRange.cs" />
     <Compile Include="Services\Excels\ExcelWorkbook.cs" />
     <Compile Include="Services\Excels\ExcelWorksheet.cs" />
-    <Compile Include="Services\FileBasedAgentFactory.cs" />
     <Compile Include="Services\IAgentFactory.cs" />
     <Compile Include="Services\IBulkRequestProcessor.cs" />
     <Compile Include="Services\Excels\IExcelInputReader.cs" />

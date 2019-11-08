@@ -48,6 +48,17 @@ namespace Crawler.Presesentation
             });
             IBulkRequestProcessor bulkProcessor = new DefaultBulkRequestProcessor();
             var response = bulkProcessor.Process(bulkRequest);
+            var strBuilder = new StringBuilder();
+            strBuilder.AppendLine("Account,Url,Platform,Region,Owner,Avg Post Per week,Followers,");
+            foreach (var item in response.Responses)
+            {
+                var url = "";
+                FacebookCrawlerDataOutput output = null;
+                if (item.Input is FacebookCrawlerDataInput) url = ((FacebookCrawlerDataInput)item.Input).PageUrl;
+                if (item.Output is FacebookCrawlerDataOutput) output = ((FacebookCrawlerDataOutput)item.Output);
+                strBuilder.AppendLine($"{item.Input.AccountName},{url},{item.Input.Platform},{item.Input.Region},{item.Input.Owner},{output?.AvgPostPerWeek},{output?.FollowersCount},");
+            }
+            File.WriteAllText("../../result.csv", strBuilder.ToString());
             Console.ReadLine();
         }
     }

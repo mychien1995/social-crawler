@@ -9,7 +9,21 @@ namespace Crawler.Providers.FacebookCrawler
 {
     public class FacebookCrawlerDataOutput : DataOutputBase
     {
-        public int FollowersCount { get; set; }
-        public decimal AvgPostPerWeek { get; set; }
+        public int? FollowersCount
+        {
+            get
+            {
+                if (this.PropertyBag == null || !this.PropertyBag.ContainsKey("Followers") || this.PropertyBag["Followers"] == null) return null;
+                return int.Parse(this.PropertyBag["Followers"].ToString());
+            }
+        }
+        public decimal? AvgPostPerWeek
+        {
+            get
+            {
+                if (this.PropertyBag == null || !this.PropertyBag.ContainsKey("AvgPostPerWeek") || this.PropertyBag["AvgPostPerWeek"] == null) return null;
+                return decimal.Parse(this.PropertyBag["AvgPostPerWeek"].ToString());
+            }
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace Crawler.Providers.FacebookCrawler
                 htmlPropertiesDict.Add(htmlProperty.Property, htmlProperty.GetValue(_driver, input));
             }
             this.IsActive = false;
-            var output = new DataOutputBase();
+            var output = new FacebookCrawlerDataOutput();
             output.PropertyBag = htmlPropertiesDict;
             return output;
         }
